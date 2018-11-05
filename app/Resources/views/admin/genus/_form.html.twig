@@ -1,6 +1,15 @@
 {{ form_start(genusForm) }}
+    {{ form_errors(genusForm) }}
+
     {{ form_row(genusForm.name) }}
-    {{ form_row(genusForm.subFamily) }}
+    {{ dump(genusForm.subFamily.vars) }}
+    {{ form_row(genusForm.subFamily,{
+        label: 'test',
+        attr:{
+            class: 'foo',
+        },
+        placeholder: 'select a sub family'
+    }) }}
     {{ form_row(genusForm.speciesCount, {
         'label': 'Number of Species'
     }) }}
