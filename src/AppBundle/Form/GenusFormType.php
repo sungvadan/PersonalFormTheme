@@ -9,6 +9,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GenusFormType extends AbstractType
@@ -24,7 +26,9 @@ class GenusFormType extends AbstractType
                     return $repo->createAlphabeticalQueryBuilder();
                 }
             ])
-            ->add('speciesCount')
+            ->add('speciesCount',null, array(
+                'help' => 'testqsd sqdf sqdf sqdf'
+            ))
             ->add('funFact')
             ->add('isPublished', ChoiceType::class, [
                 'choices' => [
@@ -39,6 +43,12 @@ class GenusFormType extends AbstractType
             ])
         ;
     }
+
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        $view['funFact']->vars['help'] = 'For example, leatherback sea turtles';
+    }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
